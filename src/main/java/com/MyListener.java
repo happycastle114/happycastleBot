@@ -53,6 +53,9 @@ public class MyListener extends ListenerAdapter
             discordUtiles.deleteMessage(message, "바다향기가 삭제함");
             discordUtiles.waitForEdit(ms);
         }
+        if (content.equals("!happy")){
+
+        }
 
     }
 }
