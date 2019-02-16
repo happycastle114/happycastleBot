@@ -5,6 +5,8 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.entities.User;
 
+import java.util.Calendar;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
@@ -37,9 +39,26 @@ public class DiscordUtiles {
             // which was provided to sendPrivateMessage(User, String) as a parameter
         });*/
     }
-    public Message waitForEdit(Message message)
+    public Message waitForEdit(Message message, String str, int time)
     {
-        return message.editMessage("메세지가 파괴되었습니다").completeAfter(1, TimeUnit.MINUTES);
+        return message.editMessage(str).completeAfter(time, TimeUnit.SECONDS);
+    }
+    public int calcdate(int _year, int _month, int _day){
+        try{
+            TimeZone tz = TimeZone.getTimeZone("Asia/Seoul");
+            Calendar today = Calendar.getInstance(tz);
+            Calendar dday = Calendar.getInstance(tz);
+            dday.set(_year, _month-1, _day);
+            long cnt_dday = dday.getTimeInMillis() / 86400000;
+            long cnt_today = today.getTimeInMillis() / 86400000;
+            long sub = cnt_dday - cnt_today;
+            return (int) sub + 1;
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
 
