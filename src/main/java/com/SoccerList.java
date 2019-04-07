@@ -8,12 +8,15 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.FileInputStream;
+import java.util.ArrayList;
+
 public class SoccerList {
 
 
 
     public static JSONArray[] eplrank = new JSONArray[100];
-
+    public static ArrayList<String> banword = new ArrayList<>();
 
 
     public static void RANK_Update(int league_code) throws Exception{
@@ -84,22 +87,14 @@ public class SoccerList {
         }
         mc.sendMessage(message).queue();
     }*/
+    public static String update = new String();
 
+    public static void Me_Update(){
+        TXTReader txtReader = new TXTReader();
+        update = txtReader.ArraytoString(txtReader.Reader("update"));
+        banword = txtReader.Reader("banword");
+    }
 
-    public String epl = "1위 : 맨체스터 시티\n2위 : 리버풀\n3위 : 토트넘\n4위 : 맨체서터 유나이티드\n" +
-            "5위 : 아스날\n6위 : 첼시\n7위 : 울브즈\n8위 : 왓포드\n9위 : 에버튼\n" +
-            "10위 : 웨스트햄 유나이티드\n11위 : 본머스\n12위 : 레스터 시티\n"  +
-            "13위 : 크리스탈 펠리스\n14위 : 브라이튼\n15위 : 번리\n16위 : 뉴캐슬 유나이티드"  +
-              "\n17위 : 카디프 시티\n18위 : 사우샘프턴\n19위 : 풀럼\n20위 : 허더스필드" +
-            "\n매일 오후 6시 업데이트, 순위표 출처 : 구글";
-    public String epltoday = "Nothing\n" +
-            "epl 오늘경기는 매일 6시 업데이트 됩니다.\n" +
-            "오늘의 범위는 어제 오후 6시 ~ 오늘 오후 6시";
-    public String laligatoday = "1위 : 바르셀로나\n2위 : 레알 마드리드\n3위 : AT 마드리드\n4위 : 세비야\n" +
-            "5위 : 헤타페\n6위 : 알레베스\n7위 : 레알 베티스\n8위 : 발렌시아\n" +
-            "9위 : 레알 소시에다드\n10위 : 에이바르\n11위 : 레가네스\n12위 : 에스파뇰\n" +
-            "13위 : 아틀레틱\n14위 : 레반테\n15위 : 바야돌리드\n16위 : 셀타 비고\n" +
-            "17위 : 지로나\n18위 : 라요\n19위 : 비야레알\n20위 : 우에스카\n";
     public String uefa16 = "1차전\n로마 2 : 1 포르투 / 맨체스터 유나이티드 0 : 2 PSG(2/13 수 오전 5시)\n" +
             "토트넘 3 : 0 도르트문트 / 아약스 1 : 2 레알 마드리드(2/14 목 오전 5시)\n" +
             "리옹 : 바르셀로나 / 리버풀 : 바이에른 뮌헨(2/20 수 오전 5시)\n" +
@@ -132,9 +127,13 @@ public class SoccerList {
     public String helptable ="'!도움 관리자'\n'!도움 스포츠'\n'!도움 기타' !마크주소";
     public String helpadmin ="'!오만원'\n'!켓냥이'\n'!드래곤'\n'!우랄스키'\n'!신사스키'\n'!플랭커'\n'!샘물청'";
     public String helpsport ="'!epl'\n'!epl 오늘경기'\n'!laliga'\n'!uefa'\n'!유로파'";
-    public String helpguitar ="'!말해\n!ㅇㅁㅇ\n!러시안룰렛\n!happycastle\n!건의사항\n!감옥\n!단어신청\n!행맨시작\n!행맨종료";
-    public String update = "ㅇㅁㅇ 오픈베타 2.3.1 - 건의사항이 생겼습니다! !건의사항\n - 행맨이 생겼습니다! !행맨시작 , !행맨종료\n - 행맨 단어신청을 받습니다! !단어신청 \n - !감옥 명령어가 생겼습니다! 철컹철컹" ;
-
-
-
+    public String helpguitar ="'!말해\n!ㅇㅁㅇ\n!러시안룰렛\n!happycastle\n!건의사항\n!감옥\n!단어신청\n!행맨시작\n!행맨종료\n!자기소개";
+    public String gori = "현재 디스코드에서 가장 인기 있는 식품이라 고 말하고자 하면 단연 드래곤 꼬리고기가 떠 오르는 사람이 대다수일 것이다. 이 꼬리고기 가 인기가 많은 이유를 분석, 검토하여 이 논 문을 써내렸다.\n" +
+            "우선 꼬리고기의 선호도부터 알아봤다. 대다 수의 사람들은 맛있다며 호평을 하지만 일부 는 징그럽다거나 이상하다며 기피하기도 한 다. 이는 한국 음식 중 번데기에서 나타나는 특징이기도 하다. 많은 사람들이 고소한 맛에 즐기지만 그 징그러운 형태 때문에 또한 많은 사람들이 꺼려한다. 나는 이 관점에서 드래곤 꼬리고기를 관찰했다. \n" +
+            "또한 살펴본 것은 그 수요와 가격이다. 현재 드래곤 꼬리고기의 가격은 암암리에 거래되고 있어 오만원권으로는 택도 없다. 만일 드래곤 꼬리고기를 요리 및 식용으로 사용하기 위한 \n" +
+            "경우 적어도 문제인이나 박원숭은 되어야 한 다고 생각할 정도의 가격대가 형성되어 있기 때문에 마치 초창기의 허니 버터칩과 같은 현 상이라고 판단한다. 물론 허니 버터칩은 그 가격이 3000원대였으며, 암암리에 거래되고 있지는 않다는 특징이 있지만 말이다.\n" +
+            "어찌되었든 마지막으로, 그 드래곤이 불을 뿜 어댈 때마다 꼬리고기의 맛이 좋아진다는 말 이 있는데, 이는 사실로 밝혀졌다. 드래곤이 극대로를 할 때마다 꼬리고기의 가격이 오른 현상이 관찰되었고, 이는 맛이 좋아졌다는 것 과 연결된다고 판단한다.\n" +
+            "이상으로 논문을 마친다. 개소리 읽느라 고생 많았다";
+    //public String update = "HOB 오픈베타 3.2.3 - 행맨 힌트가 추가되었습니다! 6회 실패시 자동으로 출력됩니다! \n - 행맨 이제 단어를 입력해도 정답으로 인식합니다! \n - ex) \"ㅎㅏㄴ\" (X) \"한\" \n - 이스터애그가 조금 추가되었습니다!";
+    //public String[] banword = {"리중딱","한꼴딱","햎캐바보","시발","ㅗ"};
 }

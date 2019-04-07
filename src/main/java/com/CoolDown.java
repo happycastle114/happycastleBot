@@ -22,7 +22,7 @@ public class CoolDown {
         } else{
             long longtime = (date.getTime() - user_cool.get(user).getTime()) / 1000 / 60;
             System.out.println(longtime);
-            if((int) longtime > 10){
+            if((int) longtime >= 5){
                 user_cool.replace(user, date);
                 cool.result = true;
                 return cool;

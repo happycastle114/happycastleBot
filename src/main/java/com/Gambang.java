@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class Gambang {
     public static HashMap<Member, Date> user_cool = new HashMap<Member, Date>();
     public static HashMap<Member, Integer> user_PrisonTime = new HashMap<Member, Integer>();
-    public static CoolDownType CheckCoolDown(Member user){
+    public static CoolDownType CheckCoolDown(Member user, Guild guild){
         Date date = new Date();
         CoolDownType cool = new CoolDownType();
             long longtime = (date.getTime() - user_cool.get(user).getTime()) / 1000 / 60;
@@ -24,13 +24,14 @@ public class Gambang {
             if((int) longtime > user_PrisonTime.get(user)){
                 user_cool.remove(user, date);
                 user_PrisonTime.remove(user);
-                Guild guild = user.getGuild();
                 GuildController guildController = guild.getController();
-                Role role = guild.getRoleById("546203158842572819");
-                guildController.removeSingleRoleFromMember(user, role);
+                Role role = guild.getRoleById("546225849762971650");
+                Role role2 = guild.getRoleById("478200622840152064");
+                guildController.addSingleRoleToMember(user, role2).queue();
+                guildController.removeSingleRoleFromMember(user, role).queue();
                 cool.result = true;
                 WriteToFile writeToFile = new WriteToFile();
-                writeToFile.write(user.getAsMention() + " 님 만기출소 at " + date.toString(),"감방회고록" );
+                writeToFile.write(user.getNickname() + " 님 만기출소 at " + date.toString(),"감방회고록" );
                 return cool;
             } else{
                 cool.result = false;
@@ -39,15 +40,18 @@ public class Gambang {
             }
 
     }
-    public static boolean GoJail(Member member, int time){
+    public static boolean GoJail(Member member, int time, Guild guild, String reason){
         if(!user_PrisonTime.containsKey(member)){
             Date date = new Date();
-            Guild guild = member.getGuild();
+
             GuildController guildController = guild.getController();
-            Role role = guild.getRoleById("546203158842572819");
-            guildController.addSingleRoleToMember(member,role);
+            Role role2 = guild.getRoleById("478200622840152064");
+            Role role = guild.getRoleById("546225849762971650");
+            guildController.removeSingleRoleFromMember(member, role2).queue();
+            System.out.println(role.getName());
+            guildController.addSingleRoleToMember(member,role).queue();
             WriteToFile writeToFile = new WriteToFile();
-            writeToFile.write(member.getAsMention() + " 감옥입소 " + " at " + date.toString(), "감방회고록");
+            writeToFile.write(member.getNickname() + " 감옥입소 " + "사유 " + reason + " at " + date.toString(), "감방회고록");
             user_cool.put(member, date);
             user_PrisonTime.put(member, time);
             return true;
@@ -55,19 +59,20 @@ public class Gambang {
             return false;
         }
     }
-    public static boolean InJail(Member member){
+    public static boolean InJail(Member member, Guild guild){
         return (boolean) user_cool.containsKey(member);
     }
-    public static void bosuk(Member member){
+    public static void bosuk(Member member, Guild guild){
         user_cool.remove(member);
         Date date = new Date();
         WriteToFile writeToFile = new WriteToFile();
         user_PrisonTime.remove(member);
-        Guild guild = member.getGuild();
         GuildController guildController = guild.getController();
-        Role role = guild.getRoleById("546203158842572819");
-        guildController.removeSingleRoleFromMember(member, role);
-        writeToFile.write(member.getAsMention() + " 님 특별보석으로 퇴소 at " + date.toString(),"감방회고록");
+        Role role = guild.getRoleById("546225849762971650");
+        Role role2 = guild.getRoleById("478200622840152064");
+        guildController.addSingleRoleToMember(member, role2).queue();
+        guildController.removeSingleRoleFromMember(member, role).queue();
+        writeToFile.write(member.getNickname() + " 님 특별보석으로 퇴소 at " + date.toString(),"감방회고록");
     }
 
 }

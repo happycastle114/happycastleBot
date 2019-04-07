@@ -15,6 +15,9 @@ public class HangMan extends ListenerAdapter {
         MessageChannel messageChannel = event.getChannel();
         String content = message.getContentRaw();
         HangManGame hangManGame = new HangManGame();
+        if(content.equals("!단어업데이트")){
+            hangManGame.SetWords(messageChannel);
+        }
         if(content.equals("!행맨시작")){
             if(!hangManGame.InGame){
                 hangManGame.GameStart(messageChannel);
@@ -31,7 +34,7 @@ public class HangMan extends ListenerAdapter {
             String[] words = content.split("");
             if(words.length == 1){
                 boolean result = hangManGame.isCorrent(messageChannel, words[0]);
-            } else if(words.length == hangManGame.keyword.length){
+            } else if(content.length() == hangManGame.realword.length()){
                 hangManGame.isWords(message);
             }
         }
