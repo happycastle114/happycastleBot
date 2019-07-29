@@ -15,8 +15,8 @@ public class Search {
 
         HttpResponse<JsonNode> response;
         response = Unirest.get("https://openapi.naver.com/v1/search/image?query=" + URLEncoder.encode(league_code,"UTF-8") + "&display=5")
-                .header("X-Naver-Client-Id", "CvFK_Q3L8irCNo9knEnY")
-                .header("X-Naver-Client-Secret", "JyKnTmIlbx")
+                .header("X-Naver-Client-Id", "")
+                .header("X-Naver-Client-Secret", "")
                 .asJson();
         SearchVar searchVar = new SearchVar();
         JSONObject jsonObject = new JSONObject();
