@@ -373,7 +373,7 @@ public class MyListener extends ListenerAdapter {
                 }
             }
         }
-        if(message.getMember().hasPermission(Permission.ADMINISTRATOR) || (message.getAuthor().getAsTag().equals("happycastle#6206")))
+        if(message.getMember().hasPermission(Permission.ADMINISTRATOR)))
         {
             Guild guild = message.getGuild();
             GuildController guildController = guild.getController();
