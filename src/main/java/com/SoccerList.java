@@ -21,7 +21,7 @@ public class SoccerList {
 
     public static void RANK_Update(int league_code) throws Exception{
         HttpResponse<JsonNode> response;
-        response = Unirest.get("https://api-football-v1.p.rapidapi.com/leagueTable/" + league_code).header("X-RapidAPI-Key", "eaebed5d6emsh0b42de5d003fb91p16bd36jsn01c2a4cc8942").asJson();
+        response = Unirest.get("https://api-football-v1.p.rapidapi.com/leagueTable/" + league_code).header("X-RapidAPI-Key", "").asJson();
 
         JSONObject jsonObject = new JSONObject();
         JSONArray jsonArray = new JSONArray();
@@ -35,7 +35,7 @@ public class SoccerList {
     }
     /*public static void Laliga_Update() throws Exception{
 
-        HttpResponse<JsonNode> response2 = Unirest.get("https://api-football-v1.p.rapidapi.com/leagueTable/87").header("X-RapidAPI-Key", "eaebed5d6emsh0b42de5d003fb91p16bd36jsn01c2a4cc8942").asJson();
+        HttpResponse<JsonNode> response2 = Unirest.get("https://api-football-v1.p.rapidapi.com/leagueTable/87").header("X-RapidAPI-Key", "").asJson();
 
         laliga = (JSONObject) response2.getBody().getObject();
         laliga = (JSONObject) laliga.getJSONObject("api");
